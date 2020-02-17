@@ -1,0 +1,19 @@
+package com.travix.medusa.busyflights.service;
+
+import com.travix.medusa.busyflights.dto.CrazyAirFlightDTO;
+import com.travix.medusa.busyflights.model.CrazyAirFlight;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+/**
+ * This class has the methods signature of Crazy Air flights entity.
+ *
+ * @author Daniel Loureiro (danielloureiro1995@hotmail.com)
+ * @since 0.0.1
+ */
+public interface CrazyAirFlightService {
+
+    Page<CrazyAirFlightDTO> getAllCrazyAirFlights(final Pageable pageable);
+
+    CrazyAirFlightDTO convertToDTO(CrazyAirFlight crazyAirFlight);
+}

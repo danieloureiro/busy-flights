@@ -2,7 +2,7 @@
 
 **Background:**
 
-BusyFlights is a flights search solution which aggregates flight results initially from 2 different suppliers (CrazyAir and ToughJet). A future iteration (not part of the test) may add more suppliers.
+BusyFlights is a flights search solution which aggregates toughJetFlight results initially from 2 different suppliers (CrazyAir and ToughJet). A future iteration (not part of the test) may add more suppliers.
 
 
 **What is required:**
