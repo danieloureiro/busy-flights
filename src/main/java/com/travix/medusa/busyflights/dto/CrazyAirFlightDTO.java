@@ -1,7 +1,6 @@
 package com.travix.medusa.busyflights.dto;
 
 import com.travix.medusa.busyflights.enums.CabinClassEnum;
-import com.travix.medusa.busyflights.enums.IATACodesEnum;
 import com.travix.medusa.busyflights.model.CrazyAirFlight;
 
 import java.time.LocalDateTime;
@@ -19,7 +18,7 @@ public class CrazyAirFlightDTO {
     private LocalDateTime arrivalDate;
     private String airline;
     private Float price;
-    private String cabinClass;
+    private CabinClassEnum cabinClass;
     private String departureAirportCode;
     private String destinationAirportCode;
     private Integer numberOfPassengers;
@@ -64,11 +63,11 @@ public class CrazyAirFlightDTO {
         this.price = price;
     }
 
-    public String getCabinClass() {
+    public CabinClassEnum getCabinClass() {
         return cabinClass;
     }
 
-    public void setCabinClass(final String cabinClass) {
+    public void setCabinClass(final CabinClassEnum cabinClass) {
         this.cabinClass = cabinClass;
     }
 

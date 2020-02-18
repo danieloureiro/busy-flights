@@ -1,7 +1,6 @@
 package com.travix.medusa.busyflights.model;
 
 import com.travix.medusa.busyflights.enums.CabinClassEnum;
-import com.travix.medusa.busyflights.enums.IATACodesEnum;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
@@ -36,15 +35,15 @@ public class CrazyAirFlight {
     private Float price;
 
     @Column(name="cabin_class")
-    //private CabinClassEnum cabinClass;
-    private String cabinClass;
+    @Enumerated(EnumType.STRING)
+    private CabinClassEnum cabinClass;
 
     @Column(name="departure_airport_code")
-    //@Enumerated(EnumType.STRING)
+    @Length(max = 3)
     private String departureAirportCode;
 
     @Column(name="destination_airport_code")
-    //@Enumerated(EnumType.STRING)
+    @Length(max = 3)
     private String destinationAirportCode;
 
     @Column(name="number_of_passengers")
@@ -55,7 +54,7 @@ public class CrazyAirFlight {
                           final LocalDateTime arrivalDate,
                           final String airline,
                           final Float price,
-                          final String cabinClass,
+                          final CabinClassEnum cabinClass,
                           final String departureAirportCode,
                           final String destinationAirportCode,
                           final Integer numberOfPassengers) {
@@ -113,11 +112,11 @@ public class CrazyAirFlight {
         this.price = price;
     }
 
-    public String getCabinClass() {
+    public CabinClassEnum getCabinClass() {
         return cabinClass;
     }
 
-    public void setCabinClass(final String cabinClass) {
+    public void setCabinClass(final CabinClassEnum cabinClass) {
         this.cabinClass = cabinClass;
     }
 

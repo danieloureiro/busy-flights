@@ -8,27 +8,13 @@ package com.travix.medusa.busyflights.enums;
  * @author Daniel Loureiro (danielloureiro1995@hotmail.com)
  */
 public enum CabinClassEnum {
+    /**
+     * Economy class
+     */
+    E,
 
     /**
-     *
+     * Business class
      */
-    E("Economy"),
-
-    /**
-     *
-     */
-    B("Business");
-
-    private String description;
-
-    /**
-     * The constructor of cabin class codes.
-     *
-     * @param description The airport name;
-     */
-    CabinClassEnum(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() { return description; }
+    B;
 }
