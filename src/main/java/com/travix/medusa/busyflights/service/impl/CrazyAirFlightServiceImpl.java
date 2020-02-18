@@ -1,5 +1,7 @@
 package com.travix.medusa.busyflights.service.impl;
 
+import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
+import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.dto.CrazyAirFlightDTO;
 import com.travix.medusa.busyflights.model.CrazyAirFlight;
 import com.travix.medusa.busyflights.repository.CrazyAirFlightRepository;
@@ -8,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class implements {@link CrazyAirFlightService}.
@@ -29,6 +34,11 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     public Page<CrazyAirFlightDTO> getAllCrazyAirFlights(final Pageable pageable) {
         Page<CrazyAirFlight> crazyAirFlights = crazyAirFlightRepository.findAll(pageable);
         return crazyAirFlights.map(this::convertToDTO);
+    }
+
+    @Override
+    public List<CrazyAirResponse> searchCrazyAirFlights(final CrazyAirRequest crazyAirRequest) {
+        return Collections.emptyList();
     }
 
     @Override

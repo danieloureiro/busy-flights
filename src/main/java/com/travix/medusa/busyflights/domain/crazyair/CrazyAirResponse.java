@@ -3,8 +3,8 @@ package com.travix.medusa.busyflights.domain.crazyair;
 public class CrazyAirResponse {
 
     private String airline;
-    private double price;
-    private String cabinclass;
+    private float price;
+    private String cabinClass;
     private String departureAirportCode;
     private String destinationAirportCode;
     private String departureDate;
@@ -22,16 +22,16 @@ public class CrazyAirResponse {
         return price;
     }
 
-    public void setPrice(final double price) {
+    public void setPrice(final float price) {
         this.price = price;
     }
 
-    public String getCabinclass() {
-        return cabinclass;
+    public String getCabinClass() {
+        return cabinClass;
     }
 
-    public void setCabinclass(final String cabinclass) {
-        this.cabinclass = cabinclass;
+    public void setCabinClass(final String cabinClass) {
+        this.cabinClass = cabinClass;
     }
 
     public String getDepartureAirportCode() {

@@ -1,5 +1,7 @@
 package com.travix.medusa.busyflights.service.impl;
 
+import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
+import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
 import com.travix.medusa.busyflights.model.ToughJetFlight;
 import com.travix.medusa.busyflights.repository.ToughJetFlightRepository;
@@ -8,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class implements {@link ToughJetFlightService}.
@@ -27,9 +32,13 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
 
     @Override
     public Page<ToughJetFlightDTO> getAllToughJetFlights(final Pageable pageable) {
-
         Page<ToughJetFlight> flights = toughJetFlightRepository.findAll(pageable);
         return flights.map(this::convertToDTO);
+    }
+
+    @Override
+    public List<ToughJetResponse> searchToughJetFlights(final ToughJetRequest toughJetRequest) {
+        return Collections.emptyList();
     }
 
     @Override
