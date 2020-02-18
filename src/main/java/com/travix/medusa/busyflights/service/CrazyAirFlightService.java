@@ -7,6 +7,7 @@ import com.travix.medusa.busyflights.model.CrazyAirFlight;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -17,9 +18,15 @@ import java.util.List;
  */
 public interface CrazyAirFlightService {
 
-    Page<CrazyAirFlightDTO> getAllCrazyAirFlights(final Pageable pageable);
+    Page<CrazyAirFlightDTO> getAllFlights(final Pageable pageable);
 
-    List<CrazyAirResponse> searchCrazyAirFlights(final CrazyAirRequest crazyAirRequest);
+    List<CrazyAirResponse> searchFlights(final CrazyAirRequest crazyAirRequest);
 
     CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight);
+
+    List<CrazyAirResponse> findFlights(String origin,
+                                       String destination,
+                                       LocalDate departureDate,
+                                       LocalDate returnDate,
+                                       int passengerCount);
 }

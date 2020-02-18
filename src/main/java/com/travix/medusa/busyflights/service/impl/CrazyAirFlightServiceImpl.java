@@ -11,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class implements {@link CrazyAirFlightService}.
@@ -31,14 +33,30 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     }
 
     @Override
-    public Page<CrazyAirFlightDTO> getAllCrazyAirFlights(final Pageable pageable) {
+    public Page<CrazyAirFlightDTO> getAllFlights(final Pageable pageable) {
         Page<CrazyAirFlight> crazyAirFlights = crazyAirFlightRepository.findAll(pageable);
         return crazyAirFlights.map(this::convertToDTO);
     }
 
     @Override
-    public List<CrazyAirResponse> searchCrazyAirFlights(final CrazyAirRequest crazyAirRequest) {
+    public List<CrazyAirResponse> searchFlights(final CrazyAirRequest crazyAirRequest) {
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<CrazyAirResponse> findFlights(final String origin,
+                                              final String destination,
+                                              final LocalDate departureDate,
+                                              final LocalDate returnDate,
+                                              final int passengerCount) {
+        final List<CrazyAirFlight> flights =
+                //this.crazyAirFlightRepository.findFlights(origin, destination, departureDate.atStartOfDay(), departureDate.atStartOfDay(), passengerCount);
+                this.crazyAirFlightRepository.findFlights(origin, destination, passengerCount);
+        return buildResponse(flights);
+    }
+
+    private List<CrazyAirResponse> buildResponse(final List<CrazyAirFlight> flights) {
+        return flights.stream().map(CrazyAirFlightServiceImpl::apply).collect(Collectors.toList());
     }
 
     @Override
@@ -54,5 +72,17 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
         crazyAirFlightDTO.setDestinationAirportCode(crazyAirFlight.getDestinationAirportCode());
         crazyAirFlightDTO.setNumberOfPassengers(crazyAirFlight.getNumberOfPassengers());
         return crazyAirFlightDTO;
+    }
+
+    private static CrazyAirResponse apply(CrazyAirFlight flight) {
+        CrazyAirResponse responseFlight = new CrazyAirResponse();
+        responseFlight.setAirline(flight.getAirline());
+        responseFlight.setPrice(flight.getPrice());
+        responseFlight.setCabinClass(flight.getCabinClass().name());
+        responseFlight.setDepartureAirportCode(flight.getDepartureAirportCode());
+        responseFlight.setDestinationAirportCode(flight.getDestinationAirportCode());
+        responseFlight.setDepartureDate(flight.getDepartureDate().toString());
+        responseFlight.setArrivalDate(flight.getArrivalDate().toString());
+        return responseFlight;
     }
 }
