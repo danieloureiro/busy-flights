@@ -11,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class implements {@link ToughJetFlightService}.
@@ -42,6 +44,18 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
     }
 
     @Override
+    public List<ToughJetResponse> findFlights(final String from,
+                                              final String to,
+                                              final LocalDate outboundDate,
+                                              final LocalDate inboundDate,
+                                              final int numberOfAdults) {
+        final List<ToughJetFlight> flights =
+                //this.crazyAirFlightRepository.findFlights(from, to, outboundDate.atStartOfDay(), inboundDate.atStartOfDay(), numberOfAdults);
+                this.toughJetFlightRepository.findFlights(from, to, numberOfAdults);
+        return buildResponse(flights);
+    }
+
+    @Override
     public ToughJetFlightDTO convertToDTO(final ToughJetFlight toughJetFlight) {
         final ToughJetFlightDTO toughJetFlightDTO = new ToughJetFlightDTO();
         toughJetFlightDTO.setId(toughJetFlight.getId());
@@ -52,8 +66,25 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
         toughJetFlightDTO.setTax(toughJetFlight.getTax());
         toughJetFlightDTO.setDiscount(toughJetFlight.getDiscount());
         toughJetFlightDTO.setDepartureAirportName(toughJetFlight.getDepartureAirportName());
-        toughJetFlightDTO.setDestinationAirportName(toughJetFlight.getDestinationAirportName());
+        toughJetFlightDTO.setDestinationAirportName(toughJetFlight.getArrivalAirportName());
         toughJetFlightDTO.setNumberOfAdults(toughJetFlight.getNumberOfAdults());
         return toughJetFlightDTO;
+    }
+
+    private List<ToughJetResponse> buildResponse(final List<ToughJetFlight> flights) {
+        return flights.stream().map(ToughJetFlightServiceImpl::apply).collect(Collectors.toList());
+    }
+
+    private static ToughJetResponse apply(ToughJetFlight flight) {
+        ToughJetResponse responseFlight = new ToughJetResponse();
+        responseFlight.setCarrier(flight.getCarrier());
+        responseFlight.setBasePrice(flight.getBasePrice());
+        responseFlight.setTax(flight.getTax());
+        responseFlight.setDiscount(flight.getDiscount());
+        responseFlight.setDepartureAirportName(flight.getDepartureAirportName());
+        responseFlight.setArrivalAirportName(flight.getArrivalAirportName());
+        responseFlight.setOutboundDateTime(flight.getOutboundDateTime().toString());
+        responseFlight.setInboundDateTime(flight.getInboundDateTime().toString());
+        return responseFlight;
     }
 }

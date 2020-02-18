@@ -55,10 +55,6 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
         return buildResponse(flights);
     }
 
-    private List<CrazyAirResponse> buildResponse(final List<CrazyAirFlight> flights) {
-        return flights.stream().map(CrazyAirFlightServiceImpl::apply).collect(Collectors.toList());
-    }
-
     @Override
     public CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight) {
         final CrazyAirFlightDTO crazyAirFlightDTO = new CrazyAirFlightDTO();
@@ -72,6 +68,10 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
         crazyAirFlightDTO.setDestinationAirportCode(crazyAirFlight.getDestinationAirportCode());
         crazyAirFlightDTO.setNumberOfPassengers(crazyAirFlight.getNumberOfPassengers());
         return crazyAirFlightDTO;
+    }
+
+    private List<CrazyAirResponse> buildResponse(final List<CrazyAirFlight> flights) {
+        return flights.stream().map(CrazyAirFlightServiceImpl::apply).collect(Collectors.toList());
     }
 
     private static CrazyAirResponse apply(CrazyAirFlight flight) {

@@ -137,12 +137,12 @@ public class ToughJetFlight {
         this.departureAirportName = departureAirportName;
     }
 
-    public String getDestinationAirportName() {
+    public String getArrivalAirportName() {
         return arrivalAirportName;
     }
 
-    public void setDestinationAirportName(final String destinationAirportName) {
-        this.arrivalAirportName = destinationAirportName;
+    public void setArrivalAirportName(final String arrivalAirportName) {
+        this.arrivalAirportName = arrivalAirportName;
     }
 
     public Integer getNumberOfAdults() {
