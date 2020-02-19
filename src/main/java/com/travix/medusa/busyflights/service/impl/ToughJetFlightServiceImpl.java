@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,9 +50,15 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
                                               final LocalDate outboundDate,
                                               final LocalDate inboundDate,
                                               final int numberOfAdults) {
+
+        final LocalDateTime outboundDateTime = outboundDate.atStartOfDay();
+        final LocalDateTime nextDayOutboundDateTime = outboundDateTime.plusDays(1);
+
+        final LocalDateTime inboundDateTime = inboundDate.atStartOfDay();
+        final LocalDateTime nextDayInboundDateTime = inboundDateTime.plusDays(1);
+
         final List<ToughJetFlight> flights =
-                //this.crazyAirFlightRepository.findFlights(from, to, outboundDate.atStartOfDay(), inboundDate.atStartOfDay(), numberOfAdults);
-                this.toughJetFlightRepository.findFlights(from, to, numberOfAdults);
+                this.toughJetFlightRepository.findFlights(from, to, outboundDateTime, nextDayOutboundDateTime, inboundDateTime, nextDayInboundDateTime, numberOfAdults);
         return buildResponse(flights);
     }
 

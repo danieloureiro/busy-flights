@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,9 +50,15 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
                                               final LocalDate departureDate,
                                               final LocalDate returnDate,
                                               final int passengerCount) {
+
+        final LocalDateTime departureDateTime = departureDate.atStartOfDay();
+        final LocalDateTime nextDayDepartureDateTime = departureDateTime.plusDays(1);
+
+        final LocalDateTime returnDateTime = returnDate.atStartOfDay();
+        final LocalDateTime nextDayReturnDateTime = returnDateTime.plusDays(1);
+
         final List<CrazyAirFlight> flights =
-                //this.crazyAirFlightRepository.findFlights(origin, destination, departureDate.atStartOfDay(), departureDate.atStartOfDay(), passengerCount);
-                this.crazyAirFlightRepository.findFlights(origin, destination, passengerCount);
+                this.crazyAirFlightRepository.findFlights(origin, destination, departureDateTime, nextDayDepartureDateTime, returnDateTime, nextDayReturnDateTime, passengerCount);
         return buildResponse(flights);
     }
 

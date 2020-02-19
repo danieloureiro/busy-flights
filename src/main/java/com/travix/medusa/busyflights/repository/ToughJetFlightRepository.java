@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -16,23 +17,18 @@ import java.util.List;
  */
 @RepositoryRestResource
 public interface ToughJetFlightRepository extends JpaRepository<ToughJetFlight, Long> {
-        /*@Query("SELECT t FROM CrazyAirFlight t "
+    @Query(""
+            + " SELECT t FROM ToughJetFlight t "
             + " WHERE t.departureAirportName = :departureAirportName "
-            + " and t.arrivalAirportName = :arrivalAirportName "
-            + " and t.outboundDateTime = :outboundDateTime "
-            + " and t.inboundDateTime = :inboundDateTime "
-            + " and t.numberOfAdults = :numberOfAdults")
-    List<ToughJetFlight> findFlights(@Param("departureAirportName") final String from,
-                                       @Param("arrivalAirportName") final String to,
-                                       @Param("outboundDateTime") final LocalDateTime inboundDate,
-                                       @Param("inboundDateTime") final LocalDateTime outboundDate,
-                                       @Param("numberOfAdults") final int numberOfAdults);*/
-
-    @Query("SELECT t FROM ToughJetFlight t "
-            + " WHERE t.departureAirportName = :departureAirportName "
-            + " and t.arrivalAirportName = :arrivalAirportName "
-            + " and t.numberOfAdults = :numberOfAdults")
+            + "     AND t.arrivalAirportName = :arrivalAirportName "
+            + "     AND t.outboundDateTime BETWEEN :outboundDateTime AND :nextDayOutboundDateTime"
+            + "     AND t.inboundDateTime BETWEEN :inboundDateTime AND :nextDayInboundDateTime"
+            + "     AND t.numberOfAdults = :numberOfAdults")
     List<ToughJetFlight> findFlights(@Param("departureAirportName") final String from,
                                      @Param("arrivalAirportName") final String to,
+                                     @Param("outboundDateTime") final LocalDateTime outboundDateTime,
+                                     @Param("nextDayOutboundDateTime") final LocalDateTime nextDayOutboundDateTime,
+                                     @Param("inboundDateTime") final LocalDateTime inboundDateTime,
+                                     @Param("nextDayInboundDateTime") final LocalDateTime nextDayInboundDateTime,
                                      @Param("numberOfAdults") final int numberOfAdults);
 }

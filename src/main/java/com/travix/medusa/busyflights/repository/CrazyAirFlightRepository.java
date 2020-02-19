@@ -17,23 +17,18 @@ import java.util.List;
  */
 @RepositoryRestResource
 public interface CrazyAirFlightRepository extends JpaRepository<CrazyAirFlight, Long> {
-    /*@Query("SELECT c FROM CrazyAirFlight c "
+    @Query(""
+            + " SELECT c FROM CrazyAirFlight c "
             + " WHERE c.departureAirportCode = :departureAirportCode "
-            + " and c.destinationAirportCode = :destinationAirportCode "
-            + " and c.departureDate = :departureDate "
-            + " and c.arrivalDate = :arrivalDate "
-            + " and c.numberOfPassengers = :numberOfPassengers")
-    List<CrazyAirResponse> findFlights(@Param("departureAirportCode") final String origin,
-                                       @Param("destinationAirportCode") final String destination,
-                                       @Param("departureDate") final LocalDateTime departureDate,
-                                       @Param("arrivalDate") final LocalDateTime returnDate,
-                                       @Param("numberOfPassengers") final int passengerCount);*/
-
-    @Query("SELECT c FROM CrazyAirFlight c "
-            + " WHERE c.departureAirportCode = :departureAirportCode "
-            + " and c.destinationAirportCode = :destinationAirportCode "
-            + " and c.numberOfPassengers = :numberOfPassengers")
+            + "     AND c.destinationAirportCode = :destinationAirportCode "
+            + "     AND c.departureDate BETWEEN :departureDateTime AND :nextDayDepartureDateTime "
+            + "     AND c.arrivalDate BETWEEN :returnDateTime AND :nextDayReturnDateTime "
+            + "     AND c.numberOfPassengers = :numberOfPassengers")
     List<CrazyAirFlight> findFlights(@Param("departureAirportCode") final String origin,
-                                       @Param("destinationAirportCode") final String destination,
-                                       @Param("numberOfPassengers") final int passengerCount);
+                                     @Param("destinationAirportCode") final String destination,
+                                     @Param("departureDateTime") final LocalDateTime departureDateTime,
+                                     @Param("nextDayDepartureDateTime") final LocalDateTime nextDayDepartureDateTime,
+                                     @Param("returnDateTime") final LocalDateTime returnDateTime,
+                                     @Param("nextDayReturnDateTime") final LocalDateTime nextDayReturnDateTime,
+                                     @Param("numberOfPassengers") final int passengerCount);
 }
