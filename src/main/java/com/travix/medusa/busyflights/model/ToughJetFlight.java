@@ -1,7 +1,5 @@
 package com.travix.medusa.busyflights.model;
 
-import com.travix.medusa.busyflights.enums.IATACodesEnum;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

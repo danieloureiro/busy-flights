@@ -1,6 +1,5 @@
 package com.travix.medusa.busyflights.repository;
 
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.model.CrazyAirFlight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

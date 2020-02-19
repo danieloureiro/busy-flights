@@ -1,6 +1,5 @@
 package com.travix.medusa.busyflights.dto;
 
-import com.travix.medusa.busyflights.enums.IATACodesEnum;
 import com.travix.medusa.busyflights.model.ToughJetFlight;
 
 import java.time.LocalDateTime;
