@@ -36,11 +36,9 @@ public class ToughJetFlight {
     private Float discount;
 
     @Column(name="departure_airport_name")
-    //private IATACodesEnum departureAirportName;
     private String departureAirportName;
 
     @Column(name="arrival_airport_name")
-    //private IATACodesEnum arrivalAirportName;
     private String arrivalAirportName;
 
     @Column(name="number_of_adults")

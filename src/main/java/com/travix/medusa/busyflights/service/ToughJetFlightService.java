@@ -1,6 +1,5 @@
 package com.travix.medusa.busyflights.service;
 
-import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
 import com.travix.medusa.busyflights.model.ToughJetFlight;

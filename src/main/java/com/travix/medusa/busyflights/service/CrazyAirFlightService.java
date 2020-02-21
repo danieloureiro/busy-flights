@@ -1,6 +1,5 @@
 package com.travix.medusa.busyflights.service;
 
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.dto.CrazyAirFlightDTO;
 import com.travix.medusa.busyflights.model.CrazyAirFlight;

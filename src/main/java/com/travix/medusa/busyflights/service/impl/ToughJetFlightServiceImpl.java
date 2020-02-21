@@ -1,6 +1,5 @@
 package com.travix.medusa.busyflights.service.impl;
 
-import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
 import com.travix.medusa.busyflights.model.ToughJetFlight;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
