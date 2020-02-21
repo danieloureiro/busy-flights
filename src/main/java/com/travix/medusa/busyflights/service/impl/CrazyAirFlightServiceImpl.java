@@ -36,7 +36,7 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     @Override
     public Page<CrazyAirFlightDTO> getAllFlights(final Pageable pageable) {
         Page<CrazyAirFlight> crazyAirFlights = crazyAirFlightRepository.findAll(pageable);
-        return crazyAirFlights.map(this::convertToDTO);
+        return crazyAirFlights.map(this::parseToDTO);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     }
 
     @Override
-    public CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight) {
+    public CrazyAirFlightDTO parseToDTO(final CrazyAirFlight crazyAirFlight) {
         final CrazyAirFlightDTO crazyAirFlightDTO = new CrazyAirFlightDTO();
         crazyAirFlightDTO.setId(crazyAirFlight.getId());
         crazyAirFlightDTO.setDepartureDate(crazyAirFlight.getDepartureDate());
@@ -88,8 +88,8 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
         responseFlight.setCabinClass(flight.getCabinClass().name());
         responseFlight.setDepartureAirportCode(flight.getDepartureAirportCode());
         responseFlight.setDestinationAirportCode(flight.getDestinationAirportCode());
-        responseFlight.setDepartureDate(flight.getDepartureDate().toString());
-        responseFlight.setArrivalDate(flight.getArrivalDate().toString());
+        responseFlight.setDepartureDate(flight.getDepartureDate());
+        responseFlight.setArrivalDate(flight.getArrivalDate());
         return responseFlight;
     }
 }

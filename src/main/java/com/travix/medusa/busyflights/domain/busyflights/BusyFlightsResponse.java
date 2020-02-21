@@ -1,26 +1,23 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
-import com.travix.medusa.busyflights.enums.IATACodesEnum;
-
 import java.time.Instant;
 
 public class BusyFlightsResponse {
 
     private String supplier;
     private float fare;
-    private IATACodesEnum departureAirportName;
-    private IATACodesEnum arrivalAirportName;
+    private String departureAirportName;
+    private String arrivalAirportName;
     private Instant outboundDateTime;
     private Instant inboundDateTime;
+    private String airline;
 
-    private String airplane;
-
-    public String getAirplane() {
-        return airplane;
+    public String getAirline() {
+        return airline;
     }
 
-    public void setAirplane(final String airplane) {
-        this.airplane = airplane;
+    public void setAirline(final String airline) {
+        this.airline = airline;
     }
 
     public String getSupplier() {
@@ -39,19 +36,19 @@ public class BusyFlightsResponse {
         this.fare = fare;
     }
 
-    public IATACodesEnum getDepartureAirportName() {
+    public String getDepartureAirportName() {
         return departureAirportName;
     }
 
-    public void setDepartureAirportName(final IATACodesEnum departureAirportName) {
+    public void setDepartureAirportName(final String departureAirportName) {
         this.departureAirportName = departureAirportName;
     }
 
-    public IATACodesEnum getArrivalAirportName() {
+    public String getArrivalAirportName() {
         return arrivalAirportName;
     }
 
-    public void setArrivalAirportName(final IATACodesEnum arrivalAirportName) {
+    public void setArrivalAirportName(final String arrivalAirportName) {
         this.arrivalAirportName = arrivalAirportName;
     }
 

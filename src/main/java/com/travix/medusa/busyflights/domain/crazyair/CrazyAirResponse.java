@@ -1,5 +1,7 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
+import java.time.LocalDateTime;
+
 public class CrazyAirResponse {
 
     private String airline;
@@ -7,8 +9,8 @@ public class CrazyAirResponse {
     private String cabinClass;
     private String departureAirportCode;
     private String destinationAirportCode;
-    private String departureDate;
-    private String arrivalDate;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
 
     public String getAirline() {
         return airline;
@@ -50,19 +52,19 @@ public class CrazyAirResponse {
         this.destinationAirportCode = destinationAirportCode;
     }
 
-    public String getDepartureDate() {
+    public LocalDateTime getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(final String departureDate) {
+    public void setDepartureDate(final LocalDateTime departureDate) {
         this.departureDate = departureDate;
     }
 
-    public String getArrivalDate() {
+    public LocalDateTime getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(final String arrivalDate) {
+    public void setArrivalDate(final LocalDateTime arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 }

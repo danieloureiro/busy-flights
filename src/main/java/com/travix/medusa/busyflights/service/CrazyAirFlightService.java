@@ -22,7 +22,7 @@ public interface CrazyAirFlightService {
 
     List<CrazyAirResponse> searchFlights(final CrazyAirRequest crazyAirRequest);
 
-    CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight);
+    CrazyAirFlightDTO parseToDTO(final CrazyAirFlight crazyAirFlight);
 
     List<CrazyAirResponse> findFlights(String origin,
                                        String destination,
