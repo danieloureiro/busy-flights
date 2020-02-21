@@ -96,3 +96,13 @@ It is fine to change any of the supplied application code, if you choose to do s
 **Note**
 
 Please clone this project then create your own repository from it. Do not fork/branch this project when creating your solution as it will be visible to other applicants.
+
+**Running from the IDEA:**
+                          
+# Running from the IDE
+
+Execute `BusyFlightsApplication` from the IDE to launch a simulation.
+
+The application are exposed on port `8080`.
+
+Find the documentation at `/swagger-ui.html`
