@@ -22,7 +22,5 @@ public interface ToughJetFlightService {
 
     ToughJetFlightDTO convertToDTO(final ToughJetFlight toughJetFlight);
 
-    List<ToughJetResponse> searchToughJetFlights(final ToughJetRequest toughJetRequest);
-
     List<ToughJetResponse> findFlights(String from, String to, LocalDate outboundDate, LocalDate inboundDate, int numberOfAdults);
 }

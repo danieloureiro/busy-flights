@@ -33,12 +33,7 @@ public class ToughJetController {
         return toughJetFlightService.getAllToughJetFlights(pageable);
     }
 
-    @GetMapping(value = "/flight/search")
-    public List<ToughJetResponse> toughJetFlightSearch(@RequestBody final ToughJetRequest toughJetRequest) {
-        return toughJetFlightService.searchToughJetFlights(toughJetRequest);
-    }
-
-    @RequestMapping("/flights/find")
+    @GetMapping("/flights/find")
     public List<ToughJetResponse> findFlight(@RequestParam String from,
                                              @RequestParam String to,
                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate outboundDate,

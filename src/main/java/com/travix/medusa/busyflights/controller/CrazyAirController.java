@@ -33,12 +33,7 @@ public class CrazyAirController {
         return crazyAirFlightService.getAllFlights(pageable);
     }
 
-    @GetMapping(value = "/flights/search")
-    public List<CrazyAirResponse> searchFlights(@RequestBody final CrazyAirRequest crazyAirRequest) {
-        return crazyAirFlightService.searchFlights(crazyAirRequest);
-    }
-
-    @RequestMapping("/flights/find")
+    @GetMapping("/flights/find")
     public List<CrazyAirResponse> findFlight(@RequestParam String origin,
                                              @RequestParam String destination,
                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,

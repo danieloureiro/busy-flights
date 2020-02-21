@@ -40,11 +40,6 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     }
 
     @Override
-    public List<CrazyAirResponse> searchFlights(final CrazyAirRequest crazyAirRequest) {
-        return Collections.emptyList();
-    }
-
-    @Override
     public List<CrazyAirResponse> findFlights(final String origin,
                                               final String destination,
                                               final LocalDate departureDate,

@@ -40,11 +40,6 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
     }
 
     @Override
-    public List<ToughJetResponse> searchToughJetFlights(final ToughJetRequest toughJetRequest) {
-        return Collections.emptyList();
-    }
-
-    @Override
     public List<ToughJetResponse> findFlights(final String from,
                                               final String to,
                                               final LocalDate outboundDate,
