@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * This class implements {@link BusyFlightsService}.
- * <p>
+ *
  * @author Daniel Loureiro (danielloureiro1995@hotmail.com)
  * @since 0.0.1
  */
@@ -35,11 +36,12 @@ public class BusyFlightsServiceImpl implements BusyFlightsService {
         busyFlightsRequest.setReturnDate(returnDate);
         busyFlightsRequest.setNumberOfPassengers(numberOfPassengers);
 
-        List<BusyFlightsResponse> flights = Collections.synchronizedList(new ArrayList<BusyFlightsResponse>());
+        List<BusyFlightsResponse> flights = Collections.synchronizedList(new ArrayList<>());
 
         final List<SupplierConnector> suppliers = ConnectorFactory.getAllConnectors();
         suppliers.parallelStream().forEach(supplier -> flights.addAll(supplier.getFlights(busyFlightsRequest)));
 
+        flights.sort(Comparator.comparing(BusyFlightsResponse::getFare));
         return flights;
     }
 }
