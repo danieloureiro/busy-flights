@@ -1,11 +1,16 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
-public class ToughJetRequest {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
+import com.travix.medusa.busyflights.domain.base.BaseRequest;
+
+import java.time.LocalDate;
+
+public class ToughJetRequest extends BaseRequest {
 
     private String from;
     private String to;
-    private String outboundDate;
-    private String inboundDate;
+    private LocalDate outboundDate;
+    private LocalDate inboundDate;
     private int numberOfAdults;
 
     public String getFrom() {
@@ -24,19 +29,19 @@ public class ToughJetRequest {
         this.to = to;
     }
 
-    public String getOutboundDate() {
+    public LocalDate getOutboundDate() {
         return outboundDate;
     }
 
-    public void setOutboundDate(final String outboundDate) {
+    public void setOutboundDate(final LocalDate outboundDate) {
         this.outboundDate = outboundDate;
     }
 
-    public String getInboundDate() {
+    public LocalDate getInboundDate() {
         return inboundDate;
     }
 
-    public void setInboundDate(final String inboundDate) {
+    public void setInboundDate(final LocalDate inboundDate) {
         this.inboundDate = inboundDate;
     }
 
@@ -46,5 +51,14 @@ public class ToughJetRequest {
 
     public void setNumberOfAdults(final int numberOfAdults) {
         this.numberOfAdults = numberOfAdults;
+    }
+
+    @Override
+    public void fromBusyFlightsRequest(final BusyFlightsRequest busyFlightsRequest) {
+        this.from = busyFlightsRequest.getOrigin();
+        this.to = busyFlightsRequest.getDestination();
+        this.outboundDate = busyFlightsRequest.getDepartureDate();
+        this.inboundDate = busyFlightsRequest.getReturnDate();
+        this.numberOfAdults = busyFlightsRequest.getNumberOfPassengers();
     }
 }

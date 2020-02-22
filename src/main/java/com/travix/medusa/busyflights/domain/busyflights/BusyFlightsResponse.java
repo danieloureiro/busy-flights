@@ -1,6 +1,6 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 public class BusyFlightsResponse {
 
@@ -8,8 +8,8 @@ public class BusyFlightsResponse {
     private float fare;
     private String departureAirportName;
     private String arrivalAirportName;
-    private Instant outboundDateTime;
-    private Instant inboundDateTime;
+    private LocalDateTime outboundDateTime;
+    private LocalDateTime inboundDateTime;
     private String airline;
 
     public String getAirline() {
@@ -52,19 +52,19 @@ public class BusyFlightsResponse {
         this.arrivalAirportName = arrivalAirportName;
     }
 
-    public Instant getOutboundDateTime() {
+    public LocalDateTime getOutboundDateTime() {
         return outboundDateTime;
     }
 
-    public void setOutboundDateTime(final Instant outboundDateTime) {
+    public void setOutboundDateTime(final LocalDateTime outboundDateTime) {
         this.outboundDateTime = outboundDateTime;
     }
 
-    public Instant getInboundDateTime() {
+    public LocalDateTime getInboundDateTime() {
         return inboundDateTime;
     }
 
-    public void setInboundDateTime(final Instant inboundDateTime) {
+    public void setInboundDateTime(final LocalDateTime inboundDateTime) {
         this.inboundDateTime = inboundDateTime;
     }
 

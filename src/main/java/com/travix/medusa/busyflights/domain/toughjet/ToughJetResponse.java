@@ -1,6 +1,13 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
-public class ToughJetResponse {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.domain.base.BaseResponse;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+public class ToughJetResponse extends BaseResponse {
 
     private String carrier;
     private double basePrice;
@@ -8,8 +15,8 @@ public class ToughJetResponse {
     private double discount;
     private String departureAirportName;
     private String arrivalAirportName;
-    private String outboundDateTime;
-    private String inboundDateTime;
+    private Instant outboundDateTime;
+    private Instant inboundDateTime;
 
     public String getCarrier() {
         return carrier;
@@ -59,19 +66,32 @@ public class ToughJetResponse {
         this.arrivalAirportName = arrivalAirportName;
     }
 
-    public String getOutboundDateTime() {
+    public Instant getOutboundDateTime() {
         return outboundDateTime;
     }
 
-    public void setOutboundDateTime(final String outboundDateTime) {
+    public void setOutboundDateTime(final Instant outboundDateTime) {
         this.outboundDateTime = outboundDateTime;
     }
 
-    public String getInboundDateTime() {
+    public Instant getInboundDateTime() {
         return inboundDateTime;
     }
 
-    public void setInboundDateTime(final String inboundDateTime) {
+    public void setInboundDateTime(final Instant inboundDateTime) {
         this.inboundDateTime = inboundDateTime;
+    }
+
+    @Override
+    public BusyFlightsResponse toBusyFlightsResponse() {
+        BusyFlightsResponse busyFlightsResponse = new BusyFlightsResponse();
+        busyFlightsResponse.setSupplier("ToughJet");
+        busyFlightsResponse.setFare((float)(((this.basePrice * this.discount) * this.tax)/100));
+        busyFlightsResponse.setDepartureAirportName(this.departureAirportName);
+        busyFlightsResponse.setArrivalAirportName(this.arrivalAirportName);
+        busyFlightsResponse.setOutboundDateTime(LocalDateTime.ofInstant(this.outboundDateTime, ZoneOffset.UTC));
+        busyFlightsResponse.setInboundDateTime(LocalDateTime.ofInstant(this.inboundDateTime, ZoneOffset.UTC));
+        busyFlightsResponse.setAirline(this.carrier);
+        return busyFlightsResponse;
     }
 }

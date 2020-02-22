@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,8 +84,8 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
         responseFlight.setDiscount(flight.getDiscount());
         responseFlight.setDepartureAirportName(flight.getDepartureAirportName());
         responseFlight.setArrivalAirportName(flight.getArrivalAirportName());
-        responseFlight.setOutboundDateTime(flight.getOutboundDateTime().toString());
-        responseFlight.setInboundDateTime(flight.getInboundDateTime().toString());
+        responseFlight.setOutboundDateTime(flight.getOutboundDateTime().toInstant(ZoneOffset.UTC));
+        responseFlight.setInboundDateTime(flight.getInboundDateTime().toInstant(ZoneOffset.UTC));
         return responseFlight;
     }
 }

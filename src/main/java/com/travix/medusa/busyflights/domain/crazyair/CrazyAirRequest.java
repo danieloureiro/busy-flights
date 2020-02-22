@@ -1,11 +1,16 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
-public class CrazyAirRequest {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
+import com.travix.medusa.busyflights.domain.base.BaseRequest;
+
+import java.time.LocalDate;
+
+public class CrazyAirRequest extends BaseRequest {
 
     private String origin;
     private String destination;
-    private String departureDate;
-    private String returnDate;
+    private LocalDate departureDate;
+    private LocalDate returnDate;
     private int passengerCount;
 
     public String getOrigin() {
@@ -24,19 +29,19 @@ public class CrazyAirRequest {
         this.destination = destination;
     }
 
-    public String getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(final String departureDate) {
+    public void setDepartureDate(final LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(final String returnDate) {
+    public void setReturnDate(final LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -46,5 +51,14 @@ public class CrazyAirRequest {
 
     public void setPassengerCount(final int passengerCount) {
         this.passengerCount = passengerCount;
+    }
+
+    @Override
+    public void fromBusyFlightsRequest(final BusyFlightsRequest busyFlightsRequest) {
+        this.origin = busyFlightsRequest.getOrigin();
+        this.destination = busyFlightsRequest.getDestination();
+        this.departureDate = busyFlightsRequest.getDepartureDate();
+        this.returnDate = busyFlightsRequest.getReturnDate();
+        this.passengerCount = busyFlightsRequest.getNumberOfPassengers();
     }
 }

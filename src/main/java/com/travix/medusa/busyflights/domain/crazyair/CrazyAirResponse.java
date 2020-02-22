@@ -1,8 +1,11 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.domain.base.BaseResponse;
+
 import java.time.LocalDateTime;
 
-public class CrazyAirResponse {
+public class CrazyAirResponse extends BaseResponse {
 
     private String airline;
     private float price;
@@ -66,5 +69,18 @@ public class CrazyAirResponse {
 
     public void setArrivalDate(final LocalDateTime arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    @Override
+    public BusyFlightsResponse toBusyFlightsResponse() {
+        BusyFlightsResponse busyFlightsResponse = new BusyFlightsResponse();
+        busyFlightsResponse.setSupplier("CrazyAir");
+        busyFlightsResponse.setFare(this.price);
+        busyFlightsResponse.setDepartureAirportName(this.departureAirportCode);
+        busyFlightsResponse.setArrivalAirportName(this.destinationAirportCode);
+        busyFlightsResponse.setOutboundDateTime(this.departureDate);
+        busyFlightsResponse.setInboundDateTime(this.arrivalDate);
+        busyFlightsResponse.setAirline(this.airline);
+        return busyFlightsResponse;
     }
 }
