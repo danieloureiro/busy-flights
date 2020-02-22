@@ -11,6 +11,8 @@ import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -22,6 +24,10 @@ import java.util.stream.Collectors;
 import static com.travix.medusa.busyflights.utils.RequestUtils.builder;
 
 public class ToughJetConnector implements SupplierConnector {
+    /**
+     * Logger for this class.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ToughJetConnector.class);
 
     private static final String FIND_ENDPOINT = "http://localhost:8080/toughJet/flights/find";
 
@@ -51,7 +57,7 @@ public class ToughJetConnector implements SupplierConnector {
                 return crazyAirFlights.stream().map(ToughJetResponse::toBusyFlightsResponse).collect(Collectors.toList());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
         return Collections.emptyList();
     }

@@ -67,7 +67,7 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
         toughJetFlightDTO.setTax(toughJetFlight.getTax());
         toughJetFlightDTO.setDiscount(toughJetFlight.getDiscount());
         toughJetFlightDTO.setDepartureAirportName(toughJetFlight.getDepartureAirportName());
-        toughJetFlightDTO.setDestinationAirportName(toughJetFlight.getArrivalAirportName());
+        toughJetFlightDTO.setArrivalAirportName(toughJetFlight.getArrivalAirportName());
         toughJetFlightDTO.setNumberOfAdults(toughJetFlight.getNumberOfAdults());
         return toughJetFlightDTO;
     }

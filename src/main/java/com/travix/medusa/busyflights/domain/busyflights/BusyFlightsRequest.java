@@ -1,7 +1,12 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class BusyFlightsRequest {
 
     private String origin;
@@ -9,44 +14,4 @@ public class BusyFlightsRequest {
     private LocalDate departureDate;
     private LocalDate returnDate;
     private int numberOfPassengers;
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(final String origin) {
-        this.origin = origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(final String destination) {
-        this.destination = destination;
-    }
-
-    public LocalDate getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(final LocalDate departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(final LocalDate returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public int getNumberOfPassengers() {
-        return numberOfPassengers;
-    }
-
-    public void setNumberOfPassengers(final int numberOfPassengers) {
-        this.numberOfPassengers = numberOfPassengers;
-    }
 }

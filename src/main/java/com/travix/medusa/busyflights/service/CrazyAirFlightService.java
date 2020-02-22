@@ -19,7 +19,7 @@ public interface CrazyAirFlightService {
 
     Page<CrazyAirFlightDTO> getAllFlights(final Pageable pageable);
 
-    CrazyAirFlightDTO parseToDTO(final CrazyAirFlight crazyAirFlight);
+    CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight);
 
     List<CrazyAirResponse> findFlights(String origin,
                                        String destination,

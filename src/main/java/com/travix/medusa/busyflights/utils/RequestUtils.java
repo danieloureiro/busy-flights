@@ -6,7 +6,11 @@ import okhttp3.Request;
 import java.util.Map;
 import java.util.Objects;
 
-public class RequestUtils {
+public final class RequestUtils {
+
+    private RequestUtils() {
+    }
+
     /**
      * Build request object.
      *

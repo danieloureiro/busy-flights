@@ -1,6 +1,9 @@
 package com.travix.medusa.busyflights.model;
 
 import com.travix.medusa.busyflights.enums.CabinClassEnum;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
@@ -15,6 +18,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "crazy_air_flight")
+@Getter
+@Setter
+@NoArgsConstructor
 public class CrazyAirFlight {
 
     @Id
@@ -66,81 +72,6 @@ public class CrazyAirFlight {
         this.cabinClass = cabinClass;
         this.departureAirportCode = departureAirportCode;
         this.destinationAirportCode = destinationAirportCode;
-        this.numberOfPassengers = numberOfPassengers;
-    }
-
-    public CrazyAirFlight() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(final LocalDateTime departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public LocalDateTime getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(final LocalDateTime arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-
-    public String getAirline() {
-        return airline;
-    }
-
-    public void setAirline(final String airline) {
-        this.airline = airline;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(final Float price) {
-        this.price = price;
-    }
-
-    public CabinClassEnum getCabinClass() {
-        return cabinClass;
-    }
-
-    public void setCabinClass(final CabinClassEnum cabinClass) {
-        this.cabinClass = cabinClass;
-    }
-
-    public String getDepartureAirportCode() {
-        return departureAirportCode;
-    }
-
-    public void setDepartureAirportCode(final String departureAirportCode) {
-        this.departureAirportCode = departureAirportCode;
-    }
-
-    public String getDestinationAirportCode() {
-        return destinationAirportCode;
-    }
-
-    public void setDestinationAirportCode(final String destinationAirportCode) {
-        this.destinationAirportCode = destinationAirportCode;
-    }
-
-    public Integer getNumberOfPassengers() {
-        return numberOfPassengers;
-    }
-
-    public void setNumberOfPassengers(final Integer numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
     }
 }

@@ -41,6 +41,7 @@ public class BusyFlightsServiceImpl implements BusyFlightsService {
         final List<SupplierConnector> suppliers = ConnectorFactory.getAllConnectors();
         suppliers.parallelStream().forEach(supplier -> flights.addAll(supplier.getFlights(busyFlightsRequest)));
 
+        //sort by fare
         flights.sort(Comparator.comparing(BusyFlightsResponse::getFare));
         return flights;
     }

@@ -34,7 +34,7 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     @Override
     public Page<CrazyAirFlightDTO> getAllFlights(final Pageable pageable) {
         Page<CrazyAirFlight> crazyAirFlights = crazyAirFlightRepository.findAll(pageable);
-        return crazyAirFlights.map(this::parseToDTO);
+        return crazyAirFlights.map(this::convertToDTO);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     }
 
     @Override
-    public CrazyAirFlightDTO parseToDTO(final CrazyAirFlight crazyAirFlight) {
+    public CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight) {
         final CrazyAirFlightDTO crazyAirFlightDTO = new CrazyAirFlightDTO();
         crazyAirFlightDTO.setId(crazyAirFlight.getId());
         crazyAirFlightDTO.setDepartureDate(crazyAirFlight.getDepartureDate());

@@ -7,19 +7,22 @@ import com.travix.medusa.busyflights.enums.Supplier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConnectorFactory {
+public final class ConnectorFactory {
+
+    private ConnectorFactory() {
+    }
+
     public static SupplierConnector resolve(Supplier supplier) {
 
         switch(supplier){
-            case CrazyAir: return new CrazyAirConnector();
-            case ToughJet: return new ToughJetConnector();
+            case CRAZY_AIR: return new CrazyAirConnector();
+            case TOUGH_JET: return new ToughJetConnector();
         }
         return null;
     }
 
     public static List<SupplierConnector> getAllConnectors() {
 
-        //TODO: perhaps make dynamic
         List<SupplierConnector> suppliers = new ArrayList<>();
         suppliers.add(new CrazyAirConnector());
         suppliers.add(new ToughJetConnector());
