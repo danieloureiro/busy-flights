@@ -1,0 +1,26 @@
+version: '2.3'
+
+services:
+  postgres-crazy-air:
+    container_name: postgres-crazy-air
+    image: travix/postgres
+    ports:
+      - "127.0.0.1:15433:5432"
+    environment:
+      PGUSER: postgres
+      POSTGRES_DB: crazy-air
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_CONFIGS: "max_connections:400"
+
+  postgres-tough-jet:
+    container_name: postgres-tough-jet
+    image: travix/postgres
+    ports:
+      - "127.0.0.1:15533:5442"
+    environment:
+      PGUSER: postgres
+      POSTGRES_DB: tough-jet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_CONFIGS: "max_connections:400"
