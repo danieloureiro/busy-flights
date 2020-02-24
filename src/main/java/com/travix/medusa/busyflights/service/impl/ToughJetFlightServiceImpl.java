@@ -56,6 +56,13 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
         return buildResponse(flights);
     }
 
+    /**
+     * Convert a flight from {@link ToughJetFlight} entity to {@link ToughJetFlightDTO}.
+     *
+     * @param toughJetFlight the ToughJet flights
+     *
+     * @return {@link ToughJetFlightDTO}
+     */
     @Override
     public ToughJetFlightDTO convertToDTO(final ToughJetFlight toughJetFlight) {
         final ToughJetFlightDTO toughJetFlightDTO = new ToughJetFlightDTO();
@@ -72,10 +79,24 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
         return toughJetFlightDTO;
     }
 
+    /**
+     * Build the ToughJet flights response.
+     *
+     * @param flights list of {@link ToughJetFlight} entity
+     *
+     * @return a list of {@link ToughJetResponse} flights
+     */
     private List<ToughJetResponse> buildResponse(final List<ToughJetFlight> flights) {
         return flights.stream().map(ToughJetFlightServiceImpl::apply).collect(Collectors.toList());
     }
 
+    /**
+     * Convert flight from {@link ToughJetFlight} to to {@link ToughJetResponse}.
+     *
+     * @param flight the {@link ToughJetFlight} flight
+     *
+     * @return a {@link ToughJetResponse} flight
+     */
     private static ToughJetResponse apply(ToughJetFlight flight) {
         ToughJetResponse responseFlight = new ToughJetResponse();
         responseFlight.setCarrier(flight.getCarrier());

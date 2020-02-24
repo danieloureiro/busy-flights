@@ -5,6 +5,12 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represent the BusyFlights response.
+ *
+ * @author Daniel Loureiro (danielloureiro1995@hotmail.com)
+ * @since 0.0.1
+ */
 @Getter
 @Setter
 public class BusyFlightsResponse {

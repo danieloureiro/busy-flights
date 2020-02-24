@@ -106,3 +106,11 @@ Execute `BusyFlightsApplication` from the IDE to launch a simulation.
 The application are exposed on port `8080`.
 
 Find the documentation at `/swagger-ui.html`
+
+Build the container `mvn -T 1C -PskipAll -DskipTests -Pdocker clean install`
+
+Start the container `docker-compose up -d`
+
+Run the `/src/main/resources/postgres.sql` script in order to create the `crazy_air_flight` and `tough_jet_flight`
+
+Stop the container `docker-compose down`

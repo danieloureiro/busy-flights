@@ -23,12 +23,21 @@ import java.util.stream.Collectors;
 
 import static com.travix.medusa.busyflights.utils.RequestUtils.builder;
 
+/**
+ * This class represents the ToughJet connector through HTTP.
+ *
+ * @author Daniel Loureiro (danielloureiro1995@hotmail.com)
+ * @since 0.0.1
+ */
 public class ToughJetConnector implements SupplierConnector {
     /**
      * Logger for this class.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(ToughJetConnector.class);
 
+    /**
+     * ToughJet find endpoint.
+     */
     private static final String FIND_ENDPOINT = "http://localhost:8080/toughJet/flights/find";
 
     @Override

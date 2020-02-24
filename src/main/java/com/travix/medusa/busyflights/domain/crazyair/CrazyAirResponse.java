@@ -7,6 +7,12 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represent the CrazyAir response.
+ *
+ * @author Daniel Loureiro (danielloureiro1995@hotmail.com)
+ * @since 0.0.1
+ */
 @Getter
 @Setter
 public class CrazyAirResponse implements BaseResponse {
@@ -19,6 +25,11 @@ public class CrazyAirResponse implements BaseResponse {
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
 
+    /**
+     * This converts from {@link CrazyAirResponse} to {@link BusyFlightsResponse}
+     *
+     * @return {@link BusyFlightsResponse}
+     */
     @Override
     public BusyFlightsResponse toBusyFlightsResponse() {
         BusyFlightsResponse busyFlightsResponse = new BusyFlightsResponse();

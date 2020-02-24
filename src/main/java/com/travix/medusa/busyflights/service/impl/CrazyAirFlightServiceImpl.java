@@ -55,6 +55,13 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
         return buildResponse(flights);
     }
 
+    /**
+     * Convert a flight from {@link CrazyAirFlight} entity to {@link CrazyAirFlightDTO}.
+     *
+     * @param crazyAirFlight the CrazyAir flights
+     *
+     * @return {@link CrazyAirFlightDTO}
+     */
     @Override
     public CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight) {
         final CrazyAirFlightDTO crazyAirFlightDTO = new CrazyAirFlightDTO();
@@ -70,10 +77,24 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
         return crazyAirFlightDTO;
     }
 
+    /**
+     * Build the CrazyAir flights response.
+     *
+     * @param flights list of {@link CrazyAirFlight} entity
+     *
+     * @return a list of {@link CrazyAirResponse} flights
+     */
     private List<CrazyAirResponse> buildResponse(final List<CrazyAirFlight> flights) {
         return flights.stream().map(CrazyAirFlightServiceImpl::apply).collect(Collectors.toList());
     }
 
+    /**
+     * Convert flight from {@link CrazyAirFlight} to to {@link CrazyAirResponse}.
+     *
+     * @param flight the {@link CrazyAirFlight} flight
+     *
+     * @return a {@link CrazyAirResponse} flight
+     */
     private static CrazyAirResponse apply(CrazyAirFlight flight) {
         CrazyAirResponse responseFlight = new CrazyAirResponse();
         responseFlight.setAirline(flight.getAirline());
