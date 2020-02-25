@@ -8,8 +8,6 @@ import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
-import com.travix.medusa.busyflights.dto.CrazyAirFlightDTO;
-import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
 import com.travix.medusa.busyflights.enums.CabinClassEnum;
 import com.travix.medusa.busyflights.model.CrazyAirFlight;
 import com.travix.medusa.busyflights.model.ToughJetFlight;
@@ -23,10 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.FileInputStream;
@@ -96,17 +90,14 @@ public class BusyFlightsApplicationTests {
 		flight2.setNumberOfPassengers(2);
 		flights.add(flight2);
 
-		final Pageable pageable = PageRequest.of(0, 10);
-		final Page<CrazyAirFlight> flightsPage = new PageImpl<>(flights, pageable, flights.size());
-
 		// when
-		Mockito.when(this.crazyAirFlightRepository.findAll(pageable)).thenReturn(flightsPage);
-		final Page<CrazyAirFlightDTO> resultFlights = this.crazyAirFlightService.getAllFlights(pageable);
+		Mockito.when(this.crazyAirFlightRepository.findAll()).thenReturn(flights);
+		final List<CrazyAirResponse> resultFlights = this.crazyAirFlightService.getAllFlights();
 
 		// then
-		Assert.assertEquals(2, resultFlights.getTotalElements());
-		Assert.assertEquals("TAP", resultFlights.getContent().get(0).getAirline());
-		Assert.assertEquals("Ryanair", resultFlights.getContent().get(1).getAirline());
+		Assert.assertEquals(2, resultFlights.size());
+		Assert.assertEquals("TAP", resultFlights.get(0).getAirline());
+		Assert.assertEquals("Ryanair", resultFlights.get(1).getAirline());
 
 	}
 
@@ -221,17 +212,14 @@ public class BusyFlightsApplicationTests {
 		flight2.setNumberOfAdults(2);
 		flights.add(flight2);
 
-		final Pageable pageable = PageRequest.of(0, 10);
-		final Page<ToughJetFlight> flightsPage = new PageImpl<>(flights, pageable, flights.size());
-
 		// when
-		Mockito.when(this.toughJetFlightRepository.findAll(pageable)).thenReturn(flightsPage);
-		final Page<ToughJetFlightDTO> result = this.toughJetFlightService.getAllFlights(pageable);
+		Mockito.when(this.toughJetFlightRepository.findAll()).thenReturn(flights);
+		final List<ToughJetResponse> result = this.toughJetFlightService.getAllFlights();
 
 		// then
-		Assert.assertEquals(2, result.getTotalElements());
-		Assert.assertEquals("TAP", result.getContent().get(0).getCarrier());
-		Assert.assertEquals("Ryanair", result.getContent().get(1).getCarrier());
+		Assert.assertEquals(2, result.size());
+		Assert.assertEquals("TAP", result.get(0).getCarrier());
+		Assert.assertEquals("Ryanair", result.get(1).getCarrier());
 	}
 
 	@Test

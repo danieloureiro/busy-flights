@@ -1,13 +1,10 @@
 package com.travix.medusa.busyflights.service.impl;
 
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
-import com.travix.medusa.busyflights.dto.CrazyAirFlightDTO;
 import com.travix.medusa.busyflights.model.CrazyAirFlight;
 import com.travix.medusa.busyflights.repository.CrazyAirFlightRepository;
 import com.travix.medusa.busyflights.service.CrazyAirFlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -27,16 +24,37 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     @Autowired
     CrazyAirFlightRepository crazyAirFlightRepository;
 
+    /**
+     * The CrazyAir service implementation constructor.
+     *
+     * @param crazyAirFlightRepository the CrazyAir repository
+     */
     public CrazyAirFlightServiceImpl(final CrazyAirFlightRepository crazyAirFlightRepository) {
         this.crazyAirFlightRepository = crazyAirFlightRepository;
     }
 
+    /**
+     * Get all flights from CrazyAir supplier.
+     *
+     * @return a list of {@link CrazyAirResponse}
+     */
     @Override
-    public Page<CrazyAirFlightDTO> getAllFlights(final Pageable pageable) {
-        Page<CrazyAirFlight> crazyAirFlights = crazyAirFlightRepository.findAll(pageable);
-        return crazyAirFlights.map(this::convertToDTO);
+    public List<CrazyAirResponse> getAllFlights() {
+        List<CrazyAirFlight> flights = crazyAirFlightRepository.findAll();
+        return buildResponse(flights);
     }
 
+    /**
+     * Find flights from CrazyAir supplier by given parameters.
+     *
+     * @param origin         the IATA code of origin airport
+     * @param destination    the IATA code of destination airport
+     * @param departureDate  the ISO_LOCAL_DATE format departure date
+     * @param returnDate     the ISO_LOCAL_DATE format return date
+     * @param passengerCount the number of passengers
+     *
+     * @return a list of {@link CrazyAirResponse} flights
+     */
     @Override
     public List<CrazyAirResponse> findFlights(final String origin,
                                               final String destination,
@@ -56,28 +74,6 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
     }
 
     /**
-     * Convert a flight from {@link CrazyAirFlight} entity to {@link CrazyAirFlightDTO}.
-     *
-     * @param crazyAirFlight the CrazyAir flights
-     *
-     * @return {@link CrazyAirFlightDTO}
-     */
-    @Override
-    public CrazyAirFlightDTO convertToDTO(final CrazyAirFlight crazyAirFlight) {
-        final CrazyAirFlightDTO crazyAirFlightDTO = new CrazyAirFlightDTO();
-        crazyAirFlightDTO.setId(crazyAirFlight.getId());
-        crazyAirFlightDTO.setDepartureDate(crazyAirFlight.getDepartureDate());
-        crazyAirFlightDTO.setArrivalDate(crazyAirFlight.getArrivalDate());
-        crazyAirFlightDTO.setAirline(crazyAirFlight.getAirline());
-        crazyAirFlightDTO.setPrice(crazyAirFlight.getPrice());
-        crazyAirFlightDTO.setCabinClass(crazyAirFlight.getCabinClass());
-        crazyAirFlightDTO.setDepartureAirportCode(crazyAirFlight.getDepartureAirportCode());
-        crazyAirFlightDTO.setDestinationAirportCode(crazyAirFlight.getDestinationAirportCode());
-        crazyAirFlightDTO.setNumberOfPassengers(crazyAirFlight.getNumberOfPassengers());
-        return crazyAirFlightDTO;
-    }
-
-    /**
      * Build the CrazyAir flights response.
      *
      * @param flights list of {@link CrazyAirFlight} entity
@@ -85,7 +81,7 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
      * @return a list of {@link CrazyAirResponse} flights
      */
     private List<CrazyAirResponse> buildResponse(final List<CrazyAirFlight> flights) {
-        return flights.stream().map(CrazyAirFlightServiceImpl::apply).collect(Collectors.toList());
+        return flights.stream().map(CrazyAirFlightServiceImpl::convertToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -95,7 +91,7 @@ public class CrazyAirFlightServiceImpl implements CrazyAirFlightService {
      *
      * @return a {@link CrazyAirResponse} flight
      */
-    private static CrazyAirResponse apply(CrazyAirFlight flight) {
+    private static CrazyAirResponse convertToResponse(CrazyAirFlight flight) {
         CrazyAirResponse responseFlight = new CrazyAirResponse();
         responseFlight.setAirline(flight.getAirline());
         responseFlight.setPrice(flight.getPrice());

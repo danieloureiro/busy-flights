@@ -1,11 +1,8 @@
 package com.travix.medusa.busyflights.controller;
 
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
-import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
 import com.travix.medusa.busyflights.service.ToughJetFlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +24,8 @@ public class ToughJetController {
     }
 
     @GetMapping(value = "/flights")
-    public Page<ToughJetFlightDTO> toughJetFlights(Pageable pageable) {
-        return toughJetFlightService.getAllFlights(pageable);
+    public List<ToughJetResponse> toughJetFlights() {
+        return toughJetFlightService.getAllFlights();
     }
 
     @GetMapping("/flights/find")

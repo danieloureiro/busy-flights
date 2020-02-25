@@ -1,10 +1,7 @@
 package com.travix.medusa.busyflights.service;
 
+import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
-import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
-import com.travix.medusa.busyflights.model.ToughJetFlight;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,10 +13,23 @@ import java.util.List;
  * @since 0.0.1
  */
 public interface ToughJetFlightService {
+    /**
+     * Get all flights from ToughJet supplier.
+     *
+     * @return a list of {@link ToughJetResponse}
+     */
+    List<ToughJetResponse> getAllFlights();
 
-    Page<ToughJetFlightDTO> getAllFlights(final Pageable pageable);
-
-    ToughJetFlightDTO convertToDTO(final ToughJetFlight toughJetFlight);
-
+    /**
+     * Find flights from CrazyAir supplier by given parameters.
+     *
+     * @param from           the IATA code of origin airport
+     * @param to             the IATA code of destination airport
+     * @param outboundDate   the ISO_LOCAL_DATE format outbound date
+     * @param inboundDate    the ISO_LOCAL_DATE format inbound date
+     * @param numberOfAdults the number of passengers
+     *
+     * @return a list of {@link CrazyAirResponse} flights
+     */
     List<ToughJetResponse> findFlights(String from, String to, LocalDate outboundDate, LocalDate inboundDate, int numberOfAdults);
 }

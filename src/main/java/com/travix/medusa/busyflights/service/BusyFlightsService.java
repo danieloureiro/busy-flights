@@ -13,5 +13,22 @@ import java.util.List;
  * @since 0.0.1
  */
 public interface BusyFlightsService {
-    List<BusyFlightsResponse> findFlights(String origin, String destination, LocalDate departureDate, LocalDate returnDate, int numberOfPassengers) throws IOException;
+    /**
+     * Find flights from all suppliers by given parameters.
+     *
+     * @param origin             the IATA code of origin airport
+     * @param destination        the IATA code of destination airport
+     * @param departureDate      the ISO_LOCAL_DATE format departure date
+     * @param returnDate         the ISO_LOCAL_DATE format return date
+     * @param numberOfPassengers the number of passengers
+     *
+     * @return a list of {@link BusyFlightsResponse} flights
+     *
+     * @throws IOException
+     */
+    List<BusyFlightsResponse> findFlights(String origin,
+                                          String destination,
+                                          LocalDate departureDate,
+                                          LocalDate returnDate,
+                                          int numberOfPassengers) throws IOException;
 }

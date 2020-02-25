@@ -4,6 +4,7 @@ import com.travix.medusa.busyflights.connector.ConnectorFactory;
 import com.travix.medusa.busyflights.connector.SupplierConnector;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.enums.Supplier;
 import com.travix.medusa.busyflights.service.BusyFlightsService;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,18 @@ import java.util.List;
  */
 @Service
 public class BusyFlightsServiceImpl implements BusyFlightsService {
+    /**
+     * Find flights on the registered {@link Supplier} on
+     * {@link ConnectorFactory#getAllConnectors()} by given parameters.
+     *
+     * @param origin             the IATA code of origin airport
+     * @param destination        the IATA code of destination airport
+     * @param departureDate      the ISO_LOCAL_DATE format departure date
+     * @param returnDate         the ISO_LOCAL_DATE format return date
+     * @param numberOfPassengers the number of passengers
+     *
+     * @return a list of {@link BusyFlightsResponse} flights
+     */
     @Override
     public List<BusyFlightsResponse> findFlights(final String origin,
                                                  final String destination,

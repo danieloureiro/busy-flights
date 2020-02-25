@@ -1,13 +1,11 @@
 package com.travix.medusa.busyflights.service.impl;
 
+import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
-import com.travix.medusa.busyflights.dto.ToughJetFlightDTO;
 import com.travix.medusa.busyflights.model.ToughJetFlight;
 import com.travix.medusa.busyflights.repository.ToughJetFlightRepository;
 import com.travix.medusa.busyflights.service.ToughJetFlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,20 +22,40 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ToughJetFlightServiceImpl implements ToughJetFlightService {
-
     @Autowired
     private ToughJetFlightRepository toughJetFlightRepository;
 
+    /**
+     * The ToughJet service implementation constructor.
+     *
+     * @param toughJetFlightRepository the ToughJet repository
+     */
     public ToughJetFlightServiceImpl(final ToughJetFlightRepository toughJetFlightRepository) {
         this.toughJetFlightRepository = toughJetFlightRepository;
     }
 
+    /**
+     * Get all flights from ToughJet supplier.
+     *
+     * @return a list of {@link ToughJetResponse}
+     */
     @Override
-    public Page<ToughJetFlightDTO> getAllFlights(final Pageable pageable) {
-        Page<ToughJetFlight> flights = toughJetFlightRepository.findAll(pageable);
-        return flights.map(this::convertToDTO);
+    public List<ToughJetResponse> getAllFlights() {
+        List<ToughJetFlight> flights = toughJetFlightRepository.findAll();
+        return buildResponse(flights);
     }
 
+    /**
+     * Find flights from CrazyAir supplier by given parameters.
+     *
+     * @param from           the IATA code of origin airport
+     * @param to             the IATA code of destination airport
+     * @param outboundDate   the ISO_LOCAL_DATE format outbound date
+     * @param inboundDate    the ISO_LOCAL_DATE format inbound date
+     * @param numberOfAdults the number of passengers
+     *
+     * @return a list of {@link CrazyAirResponse} flights
+     */
     @Override
     public List<ToughJetResponse> findFlights(final String from,
                                               final String to,
@@ -57,29 +75,6 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
     }
 
     /**
-     * Convert a flight from {@link ToughJetFlight} entity to {@link ToughJetFlightDTO}.
-     *
-     * @param toughJetFlight the ToughJet flights
-     *
-     * @return {@link ToughJetFlightDTO}
-     */
-    @Override
-    public ToughJetFlightDTO convertToDTO(final ToughJetFlight toughJetFlight) {
-        final ToughJetFlightDTO toughJetFlightDTO = new ToughJetFlightDTO();
-        toughJetFlightDTO.setId(toughJetFlight.getId());
-        toughJetFlightDTO.setOutboundDateTime(toughJetFlight.getOutboundDateTime());
-        toughJetFlightDTO.setInboundDateTime(toughJetFlight.getInboundDateTime());
-        toughJetFlightDTO.setCarrier(toughJetFlight.getCarrier());
-        toughJetFlightDTO.setBasePrice(toughJetFlight.getBasePrice());
-        toughJetFlightDTO.setTax(toughJetFlight.getTax());
-        toughJetFlightDTO.setDiscount(toughJetFlight.getDiscount());
-        toughJetFlightDTO.setDepartureAirportName(toughJetFlight.getDepartureAirportName());
-        toughJetFlightDTO.setArrivalAirportName(toughJetFlight.getArrivalAirportName());
-        toughJetFlightDTO.setNumberOfAdults(toughJetFlight.getNumberOfAdults());
-        return toughJetFlightDTO;
-    }
-
-    /**
      * Build the ToughJet flights response.
      *
      * @param flights list of {@link ToughJetFlight} entity
@@ -87,7 +82,7 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
      * @return a list of {@link ToughJetResponse} flights
      */
     private List<ToughJetResponse> buildResponse(final List<ToughJetFlight> flights) {
-        return flights.stream().map(ToughJetFlightServiceImpl::apply).collect(Collectors.toList());
+        return flights.stream().map(ToughJetFlightServiceImpl::convertToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -97,7 +92,7 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
      *
      * @return a {@link ToughJetResponse} flight
      */
-    private static ToughJetResponse apply(ToughJetFlight flight) {
+    private static ToughJetResponse convertToResponse(ToughJetFlight flight) {
         ToughJetResponse responseFlight = new ToughJetResponse();
         responseFlight.setCarrier(flight.getCarrier());
         responseFlight.setBasePrice(flight.getBasePrice());
