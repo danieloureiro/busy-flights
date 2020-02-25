@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface ToughJetFlightService {
 
-    Page<ToughJetFlightDTO> getAllToughJetFlights(final Pageable pageable);
+    Page<ToughJetFlightDTO> getAllFlights(final Pageable pageable);
 
     ToughJetFlightDTO convertToDTO(final ToughJetFlight toughJetFlight);
 

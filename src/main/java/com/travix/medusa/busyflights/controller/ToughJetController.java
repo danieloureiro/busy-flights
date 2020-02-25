@@ -28,7 +28,7 @@ public class ToughJetController {
 
     @GetMapping(value = "/flights")
     public Page<ToughJetFlightDTO> toughJetFlights(Pageable pageable) {
-        return toughJetFlightService.getAllToughJetFlights(pageable);
+        return toughJetFlightService.getAllFlights(pageable);
     }
 
     @GetMapping("/flights/find")

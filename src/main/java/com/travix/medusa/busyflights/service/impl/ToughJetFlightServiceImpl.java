@@ -33,7 +33,7 @@ public class ToughJetFlightServiceImpl implements ToughJetFlightService {
     }
 
     @Override
-    public Page<ToughJetFlightDTO> getAllToughJetFlights(final Pageable pageable) {
+    public Page<ToughJetFlightDTO> getAllFlights(final Pageable pageable) {
         Page<ToughJetFlight> flights = toughJetFlightRepository.findAll(pageable);
         return flights.map(this::convertToDTO);
     }
